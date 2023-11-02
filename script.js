@@ -4,8 +4,8 @@ const artist = document.querySelector('.artist');
 const song = document.querySelector('.song');
 const poster = document.querySelector('#poster');
 const background = document.querySelector('#bacground');
-const songs = ['./assets/music/beyonce.mp3', './assets/music/dontstartnow.mp3'];
-const posters =  ['./assets/images/lemonade.png', './assets/images/dontstartnow.png'];
+const songs = ['./assets/audio/beyonce.mp3', './assets/audio/dontstartnow.mp3'];
+const posters =  ['./assets/img/lemonade.png', './assets/img/dontstartnow.png'];
 const songArtists = ['Beyonce', 'Dua Lipa'];
 const songTitles = ["Don't Hurt Yourself", "Don't Start Now"];
 let isPlay = false;
@@ -14,7 +14,6 @@ let songIndex = 0;
 function playAudio() {
     isPlay = true;
     document.getElementById('play-pause').src = 'assets/svg/pause.png'
-    audio.src = 'assets/audio/dontstartnow.mp3';
     document.getElementById('poster').style.scale = '110%';
     audio.currentTime = 0;
     audio.play();
@@ -40,13 +39,13 @@ function nextSong() {
     songIndex++;
     songIndex = songIndex > 1 ? 0 : songIndex;
     audio.src = songs[songIndex];
-    poster.onload = function () {
-        poster.src = posters[songIndex];
-        background.src = posters[songIndex];
-    };
+    poster.src = posters[songIndex];
+    background.src = posters[songIndex];
     artist.textContent = songArtists[songIndex];
     song.textContent = songTitles[songIndex];
-    playing = true;
+    isPlay = false;
+    audio.currentTime = '0';
+    progressBar.value = '0';
     playPause();
 }
 
@@ -54,13 +53,13 @@ function previousSong() {
     songIndex--;
     songIndex = songIndex < 0 ? 1 : songIndex;
     audio.src = songs[songIndex];
-    poster.onload = function () {
-        poster.src = posters[songIndex];
-        background.src = posters[songIndex];
-    };
+    poster.src = posters[songIndex];
+    background.src = posters[songIndex];
     artist.textContent = songArtists[songIndex];
     song.textContent = songTitles[songIndex];
-    playing = true;
+    isPlay = false;
+    audio.currentTime = '0';
+    progressBar.value = '0'
     playPause();
 }
 
